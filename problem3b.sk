@@ -1,0 +1,58 @@
+pragma options "--bnd-inbits 3";
+
+generator bit bExpression(int x, int y, int depth){
+  assert depth >= 0;
+  int operator = ??;
+  if(operator==0)
+      return false;
+  bit a = bExpression(x, y, depth-1);
+  if(operator==1)
+      return !a;
+  bit b = bExpression(x, y, depth-1);
+  if(operator==2)
+      return a&&b;
+  int r = iExpression(x, y, depth-1);
+  int s = iExpression(x, y, depth-1);
+  if(operator==3)
+      return r<s;
+}
+
+generator int iExpression(int x, int y, int depth){
+  assert depth >= 0;
+  int operator = ??;
+  if(operator==0)
+      return {|x|y|};
+
+  if(operator==1) // Constants
+      return {|-1|};
+
+  int a = iExpression(x, y, depth-1);
+  int b = iExpression(x, y, depth-1);
+
+  if(operator==2)
+      return {|a(+|*)b|};
+  if(operator==3){
+      if(bExpression(x, y, depth-1))
+        return a;
+      else
+        return b;
+  }
+}
+int program(int x, int y){
+  return iExpression(x, y, 3);
+}
+
+harness void restrictions(){
+/*
+  // Problem 3.b (1)
+  assert program(5,5)==15;
+  assert program(8,3)==14;
+  assert program(1234,227)==1688;
+*/
+  // Problem 3.b (2)
+  assert program(10, 7)==17;
+  assert program(4, 7)==-7;
+  assert program(10, 3)==13;
+  assert program(1, -7)==-6;
+  assert program(1, 8)==-8;
+}

@@ -1,0 +1,72 @@
+pragma options "--bnd-inbits 3";
+
+generator bit bExpression(int x, int y, int depth){
+  assert depth >= 0;
+  int operator = ??;
+
+  if(operator==0)
+      return false;
+  
+  bit a = bExpression(x, y, depth-1);
+  if(operator==1)
+      return !a;
+  bit b = bExpression(x, y, depth-1);
+  if(operator==2)
+      return a&&b;
+
+  int fvariable = {|x|y|};
+  int svariable = {|x|y|};
+  int fconstant = {|-1|};
+  int sconstant = {|-1|};
+  if(operator==3)
+      return {|fvariable|fconstant|}<{|svariable|sconstant|};
+}
+
+generator int iExpression(int x, int y, int depth){
+  assert depth >= 0;
+  int operator = ??;
+  int fvariable = {|x|y|};
+  
+  if(operator==0)
+      return fvariable;
+
+  int fconstant = {|-1|};
+  if(operator==1) // Constants
+      return fconstant;
+
+  int svariable = {|x|y|};
+  int sconstant = {|-1|};
+  if(operator==2)
+      return {|fvariable|fconstant|}*{|svariable|sconstant|};
+
+  int a = iExpression(x, y, depth-1);
+  int b = iExpression(x, y, depth-1);
+
+  if(operator==3)
+      return a+b;
+  if(operator==4){
+      if(bExpression(x, y, depth-1))
+        return a;
+      else
+        return b;
+  }
+}
+int program(int x, int y){
+  return iExpression(x, y, 3);
+}
+
+harness void restrictions(){
+/*
+  // Problem 3.b (1)
+  assert program(5,5)==15;
+  assert program(8,3)==14;
+  assert program(1234,227)==1688;
+*/
+  // Problem 3.b (2)
+  assert program(10, 7)==17;
+  assert program(4, 7)==-7;
+  assert program(10, 3)==13;
+  assert program(1, -7)==-6;
+  assert program(1, 8)==-8;
+}
+

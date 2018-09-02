@@ -23,3 +23,10 @@ body {
    width:200px; 
    color:rgb(255, 241, 197); 
 }
+
+.warning-message {
+  padding: 7px;
+  background: orange;
+  color: black;
+  text-align: center;
+}

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <title></title>
   <link rel="StyleSheet" href="css/default.css" type="text/css"
  media="screen">
+  <meta charset="UTF-8"></meta>
 </head>
 <body>
+  <div class="warning-message">
+    <div>Use a browser that supports ES6! (not <=IE11)</div>
+    <div><3 arrow functions <3 spread operator</div>
+  </div>
 <big><big><big><big>Problem
 Set 1</big></big></big></big><br>
 <br>
@@ -19,16 +24,22 @@ Set 1</big></big></big></big><br>
  border="0" cellpadding="2" cellspacing="2">
         <tbody>
           <tr>
-            <td>
-            <div class="fakebutton" onclick="run1a1()">Click to
-run <code>1.a.1</code></div>
+            <td class="fakebutton">
+            <div onclick="run1a1()">
+              <div>Click to run <code>1.a.1</code></div>
+            </div>
             </td>
           </tr>
           <tr>
-            <td>
-            <div class="fakebutton" onclick="run1a2()">Click to run <code>1.a.2</code></div>
+            <td class="fakebutton">
+            <div  onclick="run1a2()">
+              <div>Click to run <code>1.a.2</code></div>
+              <div>If your browser asks you to wait,</div>
+              <div>please wait!</div>
+            </div>
             </td>
           </tr>
+
           <tr>
             <td>
             <div class="fakebutton" onclick="run1b()">Click to run <code>1.b</code></div>
@@ -49,7 +60,7 @@ run <code>1.a.1</code></div>
             <td>
             <div class="fakebutton" onclick="genData()">Gen data for <code>2</code></div>   <br />
                 based on the program below <br />         
-<textarea id="program1" style="width:300px; height:350px;">
+<textarea id="program1" style="width:300px; height:300px;">
  if(x < 10){ out= 2*x + 10; }
  else if(x < 35){ out= x*x + 23; }
  else if(x < 60){ out= 3*x + 12; }
@@ -64,6 +75,10 @@ run <code>1.a.1</code></div>
     </tr>
   </tbody>
 </table>
+
+<div style="background:#0047AB; padding:5px;color:white;">
+  <h3 style="text-align:right;">Diego Joshua Martínez Pineda (djoshuamartinezpineda@gmail.com)</h3>
+</div>
 <br>
 </body>
 </html>
